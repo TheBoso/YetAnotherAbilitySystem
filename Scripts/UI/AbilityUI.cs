@@ -11,6 +11,7 @@ namespace YAAS
         [SerializeField] private Image _abilityArt;
         [SerializeField] private Image _cooldownOverlay;
         [SerializeField] private TMP_Text _abilityTimer;
+        [SerializeField] private TMP_Text _keybind;
         [SerializeField] private Button _abilityButton;
 
         private RuntimeAbility _ability;
@@ -35,6 +36,11 @@ namespace YAAS
                     PutOnCooldown();
                 });
             }
+        }
+
+        public void SetKeyBind(string val)
+        {
+            _keybind.text = val;
         }
 
         public void SimulateTap()

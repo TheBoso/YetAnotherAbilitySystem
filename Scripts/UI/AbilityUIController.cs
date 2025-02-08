@@ -38,9 +38,16 @@ namespace YAAS
          CleanUp();
 
          var abs = caster.GetAllAbilities();
+
+         int i = 0;
          foreach (var ability in abs)
          {
            AddAbilityUI(ability);
+           if (i < _abilityKey.Length)
+           {
+              _spawnedAbilityUIs[i].SetKeyBind(_abilityKey[i].ToString());
+           }
+           i++;
          }
          
          caster.OnAbilityLearned += AbilityLearnt;
