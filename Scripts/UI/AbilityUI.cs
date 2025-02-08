@@ -36,6 +36,11 @@ namespace YAAS
                 });
             }
         }
+
+        public void SimulateTap()
+        {
+            _abilityButton.onClick.Invoke();
+        }
         
         public void PutOnCooldown()
         {

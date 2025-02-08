@@ -8,7 +8,9 @@ namespace YAAS
    public class AbilityUIController : MonoBehaviour
    {
       private AbilityCaster _caster;
-      
+
+      //  Map abilities to key index
+      [SerializeField] private KeyCode[] _abilityKey;
       [SerializeField] private AbilityUI _abilityUIPrefab;
        private List<AbilityUI> _spawnedAbilityUIs;
       [SerializeField] private RectTransform _parent;
@@ -16,6 +18,18 @@ namespace YAAS
       private void Awake()
       {
          _spawnedAbilityUIs = new List<AbilityUI>();
+      }
+
+      private void Update()
+      {
+         for (int i = 0; i < _abilityKey.Length; i++)
+         {
+            if (i < _spawnedAbilityUIs.Count && Input.GetKeyDown(_abilityKey[i]))
+            {
+               _spawnedAbilityUIs[i].SimulateTap();
+            }
+         }
+
       }
 
       public void SpawnAbilitiesFromCaster(AbilityCaster caster)
