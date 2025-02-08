@@ -220,8 +220,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7745103398616812965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d71d6823fb5d7d469925c6b4f1f576d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b6d806b2dbbb8940a77f80be95ba9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilityUIPrefab: {fileID: 456066396097945401, guid: 94360374c5c3d2f428086f1c56c84c04, type: 3}
+  _abilityKey: 
+  _abilityUIPrefab: {fileID: 456066396097945401, guid: 232d4215f4f12694590b7374e6fba7d4, type: 3}
   _parent: {fileID: 3892212076883494307}
