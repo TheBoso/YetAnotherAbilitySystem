@@ -14,7 +14,7 @@ public class PlayerAbilityControllerDemo : MonoBehaviour
       _uiController = FindFirstObjectByType<AbilityUIController>();
    }
 
-   private void Start()
+   private void OnEnable()
    {
       _uiController.SpawnAbilitiesFromCaster(_caster);
    }
