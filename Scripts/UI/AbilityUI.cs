@@ -33,7 +33,6 @@ namespace YAAS
                 _abilityButton.onClick.AddListener(() =>
                 {
                     onClick?.Invoke();
-                    PutOnCooldown();
                 });
             }
         }

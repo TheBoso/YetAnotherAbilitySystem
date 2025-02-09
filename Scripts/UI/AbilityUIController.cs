@@ -82,7 +82,10 @@ namespace YAAS
          AbilityUI spawnedAbility = Instantiate(_abilityUIPrefab, _parent);
          spawnedAbility.Setup(ab, () =>
          {
-            _caster.TryUseAbility(ab.Ability.AbilityID);
+            if (_caster.TryUseAbility(ab.Ability.AbilityID))
+            {
+               spawnedAbility.PutOnCooldown();
+            }
          });
          
          _spawnedAbilityUIs.Add(spawnedAbility);
