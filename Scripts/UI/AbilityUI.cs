@@ -28,7 +28,7 @@ namespace YAAS
             _abilityArt.sprite = ability.Ability.AbilityIcon;
 
             _abilityButton.enabled = onClick != null;
-            if (onClick != null)
+            if (onClick != null && ability.Ability.DisallowActivation == false)
             {
                 _abilityButton.onClick.AddListener(() =>
                 {

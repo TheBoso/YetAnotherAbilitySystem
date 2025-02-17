@@ -20,6 +20,7 @@ namespace YAAS
         [field: SerializeField] public AbilityEffect[] OnAbilityUnequipEffects { get; private set; }
         [field: SerializeField] public float AbilityCooldownSeconds { get; private set; } = 2.0f;
         [field: SerializeField] public bool IsConsumable { get; private set; }
+        [field: SerializeField] public bool DisallowActivation { get; private set; }
         
     }
 }
