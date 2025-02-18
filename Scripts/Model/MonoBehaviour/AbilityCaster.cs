@@ -13,6 +13,8 @@ namespace YAAS
 
         public IEnumerable<RuntimeAbility> GetAllAbilities() => _learnedAbilities.Values;
         
+        public bool IsPerformingAbility { get; private set; }
+        
         public event Action<RuntimeAbility> OnAbilityLearned;
         public event Action<RuntimeAbility> OnAbilityUnLearned;
 
@@ -68,6 +70,7 @@ namespace YAAS
         }
         public bool TryUseAbility(string abilityID)
         {
+            if (IsPerformingAbility) return false;
             RuntimeAbility info = null;
             if (_learnedAbilities.TryGetValue(abilityID, out info) == false)
             {
@@ -119,10 +122,12 @@ namespace YAAS
         
         private IEnumerator AbilityEffectRoutine(AbilityEffect[] effects)
         {
+            IsPerformingAbility = true;
             foreach (AbilityEffect effect in effects)
             {
                 yield return effect.PerformEffect(this);
             }
+            IsPerformingAbility = false;
         }
     }
     
