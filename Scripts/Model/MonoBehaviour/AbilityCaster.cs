@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace YAAS
 {
-    public class AbilityCaster : MonoBehaviour
+    public class AbilityCaster : NetworkBehaviour
     {
         private Dictionary<string, RuntimeAbility> _learnedAbilities = new Dictionary<string, RuntimeAbility>();
         
@@ -18,15 +20,16 @@ namespace YAAS
         public event Action<RuntimeAbility> OnAbilityLearned;
         public event Action<RuntimeAbility> OnAbilityUnLearned;
 
-        private void Awake()
+        public override void OnNetworkSpawn()
         {
+            base.OnNetworkSpawn();
             if(_startingAbilities != null && _startingAbilities.Length > 0)
             {
                 foreach (var ability in _startingAbilities)
                 {
                     LearnAbility(ability);
                 }
-            }   
+            }  
         }
 
         public void LearnAbility(AbilityDef def)
@@ -98,12 +101,8 @@ namespace YAAS
                 }
             }
 
-            AbilityEffect[] effects = info.Ability.AbilityEffects;
 
-            if (effects != null && effects.Length > 0)
-            {
-               StartCoroutine(AbilityEffectRoutine(effects));
-            }
+        
 
             info.AbilityLastUseTime = Time.time;
             
@@ -116,7 +115,33 @@ namespace YAAS
                 }
             }
 
+            int index = -1;
+
+            for (int i = 0; i < _learnedAbilities.Count; i++)
+            {
+                if (_learnedAbilities.ElementAt(i).Key == abilityID)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            UseAbilityServerRpc(index);
             return true;
+
+        }
+
+        [ServerRpc]
+        public void UseAbilityServerRpc(int abilityIndex)
+        {
+            UseAbilityClientRpc(abilityIndex);
+        }
+
+        [ClientRpc]
+        public void UseAbilityClientRpc(int abilityIndex)
+        {
+            AbilityEffect[] effects = this._learnedAbilities.ElementAt(abilityIndex).Value.Ability.AbilityEffects;
+            StartCoroutine(AbilityEffectRoutine(effects));
 
         }
         

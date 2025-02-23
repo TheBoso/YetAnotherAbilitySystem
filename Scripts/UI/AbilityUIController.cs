@@ -94,7 +94,7 @@ namespace YAAS
             CleanUp();
         }
 
-        private void CleanUp()
+        public void CleanUp()
         {
             if (_spawnedAbilityUIs != null && _spawnedAbilityUIs.Count > 0)
             {
