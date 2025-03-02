@@ -154,6 +154,11 @@ namespace YAAS
             }
             IsPerformingAbility = false;
         }
+
+        public RuntimeAbility GetAbilityByIndex(int index)
+        {
+            return _learnedAbilities.ElementAt(index).Value;
+        }
     }
     
     
